@@ -28,6 +28,14 @@ class UsersController < ApplicationController
   	end
   end
 
+  def following
+    @user = User.find(params[:id])
+  end
+
+  def followers
+    @user = User.find(params[:id])
+  end
+
 
 
   #url直接防止　メソッドを自己定義してbefore_actionで発動。

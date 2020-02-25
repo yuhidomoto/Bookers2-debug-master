@@ -4,12 +4,14 @@ class BooksController < ApplicationController
     @new_book = Book.new
   	@book = Book.find(params[:id])
     @user = @book.user
+    @current_user = current_user
     @book_comment = BookComment.new
   end
 
   def index
   	@books = Book.all #一覧表示するためにBookモデルの情報を全てくださいのall
     @book = Book.new
+    @user = current_user
   end
 
   def create
@@ -32,9 +34,8 @@ class BooksController < ApplicationController
   end
 
 
-
   def update
-  	@book = Book.find(params[:id])
+  	　@book = Book.find(params[:id])
   if @book.update(book_params)
   		redirect_to @book, notice: "successfully updated book!"
   	else #if文でエラー発生時と正常時のリンク先を枝分かれにしている。
@@ -48,6 +49,7 @@ class BooksController < ApplicationController
   	@book.destoy
   	redirect_to books_path, notice: "successfully delete book!"
   end
+
 
   private
 

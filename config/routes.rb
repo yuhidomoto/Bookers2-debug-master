@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-	 devise_for :users
+	devise_for :users
   resources :users,only: [:show,:index,:edit,:update]
   resources :books
   root 'home#top'
@@ -11,4 +11,11 @@ Rails.application.routes.draw do
   resource :book_comments, only: [:create, :destroy]
 
   end
+
+  resources :users do
+  resource :relationships, only: [:create, :destroy]
+    member do
+  get :following, :followers
+   end
+ end
 end
