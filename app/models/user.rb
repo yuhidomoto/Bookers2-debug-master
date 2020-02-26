@@ -31,4 +31,21 @@ class User < ApplicationRecord
   def unfollow!(other_user)
     following_relationships.find_by(following_id: other_user.id).destroy
   end
+
+  # scope :search, ->(name) { where('name LIKE ?',name)}
+  def self.search(search,category,select)
+    if category == "user"
+
+    return User.all unless search
+  if select == "perfect"
+     User.where(name: "#{search}")
+   elsif select == "foward"
+    User.where('name LIKE ?', "#{search}%")
+    elsif select == "down"
+    User.where('name LIKE ?', "%#{search}")
+  elsif select == "part"
+    User.where('name LIKE ?', "%#{search}%")
+  end
+  end
+end
 end

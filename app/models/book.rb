@@ -11,4 +11,19 @@ class Book < ApplicationRecord
           favorites.where(user_id: user.id).exists?
         end
 
+    scope :search, ->(search,category,select) do
+    if category == "book"
+    if select == "perfect"
+     where('(title = ?) or (body = ?)', "#{search}","#{search}")
+
+	    elsif select == "foward"
+     where('title LIKE ? or body LIKE ?', "#{search}%","#{search}%")
+	    elsif select == "down"
+     where('title LIKE ? or body LIKE ?', "%#{search}","%#{search}")
+	  	elsif select == "part"
+     where('title LIKE ? or body LIKE ?', "%#{search}%","%#{search}%")
+	  end
+   end
+end
+
 end

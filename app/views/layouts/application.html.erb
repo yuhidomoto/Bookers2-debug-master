@@ -37,6 +37,21 @@
 
       </div>
     </header><br>
+
+     <body>
+      <div class="col-xs-9">
+        <% if user_signed_in? %>
+        <%= form_tag search_users_path, :method => 'get', class: "form-inline my-2 my-lg-0" do %>
+        <%= text_field_tag :search, '', class: "form-control mr-sm-2", :placeholder => "search" %>
+        <%= select_tag 'category',options_for_select([["User", "user"], ["Book", "book"]]) %>
+        <%= select_tag 'select',options_for_select([["完全一致", "perfect"], ["前方一致", "foward"], ["後方一致", "down"], ["部分一致", "part"]]) %>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">検索</button>
+        <% end %>
+        <% end %>
+      </div>
+    </body>
+
+
     <!--ヘッダーの記述-->
     <div class="container">
       <p id="notice"><%= notice %></p> <!--デバイスでnotice設定されているので呼び出してるだけ-->
